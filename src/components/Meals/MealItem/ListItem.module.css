@@ -1,0 +1,39 @@
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  margin: 1rem;
+  border-bottom: 1px solid #e4e4e4;
+  /* margin-top: 1rem; */
+}
+
+/* .list-item:not(:last-child) {
+  border-bottom: 1px solid #e4e4e4;
+} */
+
+/* .list-item_details {
+  flex-grow: 1;
+} */
+
+.list-item h3 {
+  margin-bottom: 0.25rem;
+}
+
+.desc {
+  font-style: italic;
+}
+
+.price {
+  color: chocolate;
+  font-weight: 700;
+}
+
+.list-item_qty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.list-item_qty button {
+  margin-top: 0.5rem;
+}

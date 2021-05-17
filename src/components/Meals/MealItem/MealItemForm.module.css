@@ -1,0 +1,13 @@
+.input-group {
+  text-align: right;
+}
+
+.input-group label {
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+
+.input-group input {
+  outline: none;
+  width: 20%;
+}
