@@ -1,14 +1,14 @@
 import styles from './MealItemForm.module.css';
-import Button from '../../UI/Button';
+import Input from '../../UI/Input';
 
-const Input = props => {
+const Form = props => {
   return (
-    <form className={styles['input-group']}>
+    <form className={styles.form}>
       <label htmlFor={props.id}>{props.label}</label>
-      <input type={props.type} />
-      <Button>+ Add</Button>
+      <Input />
+      <button>+ Add</button>
     </form>
   );
 };
 
-export default Input;
+export default Form;

@@ -1,4 +1,4 @@
-import Button from '../../UI/Button';
+import Button from '../../UI/Input';
 import MealItemForm from './MealItemForm';
 import styles from './ListItem.module.css';
 
@@ -11,7 +11,7 @@ const ListItem = props => {
         <div className={styles.price}>{`$${props.price.toFixed(2)}`}</div>
       </div>
       <div className={styles['list-item_qty']}>
-        <MealItemForm id={'qty'} label={'Amount'} type={'text'} />
+        <MealItemForm />
       </div>
     </li>
   );
