@@ -5,8 +5,7 @@ import styles from './Modal.module.css';
 //These componenets could also be on a seperate file.
 //modal background
 const Backdrop = props => {
-  console.log(props);
-  return <div className={styles.backdrop} onClick={props.onClick} />;
+  return <div className={styles.backdrop} onClick={props.onClose} />;
 };
 
 //modal contents
@@ -25,11 +24,11 @@ const Modal = props => {
   return (
     <Fragment>
       {ReactDOM.createPortal(
-        <Backdrop onClick={props.onClick} />,
+        <Backdrop onClose={props.onClose} />,
         portalElement
       )}
       {ReactDOM.createPortal(
-        <ModalOverlay>{props.children}</ModalOverlay>,
+        <ModalOverLay>{props.children}</ModalOverLay>,
         portalElement
       )}
     </Fragment>
