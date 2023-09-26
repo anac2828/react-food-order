@@ -1,30 +1,51 @@
-import styles from './Cart.module.css';
+import { useContext } from 'react';
+import classes from './Cart.module.css';
 import Modal from '../UI/Modal';
+import CartItem from './CartItem';
+import CartContext from '../../store/cart-context';
 
-const Cart = props => {
+function Cart({ onShowCart }) {
+  const cartData = useContext(CartContext);
+  const hasItems = cartData.items.length > 0;
+
+  function addItemToCartHandler(item) {
+    cartData.addItem({ ...item, count: 1 });
+  }
+  function removeItemFromCartHandler(id) {
+    cartData.removeItem(id);
+  }
+
   const cartItems = (
-    <ul className={styles['cart-items']}>
-      {[{ id: 'C1', name: 'Sushi', amount: 2, price: 12.99 }].map(item => (
-        <li>{item.name}</li>
+    <ul className={classes['cart-items']}>
+      {cartData.items.map((item) => (
+        <CartItem
+          key={item.id}
+          name={item.name}
+          price={item.price}
+          count={item.count}
+          // bind will allow the function to be executed at a later time. The item object is being pass here to the remove and add handler functions
+          onRemove={removeItemFromCartHandler.bind(null, item.id)}
+          onAdd={addItemToCartHandler.bind(null, item)}
+        />
       ))}
     </ul>
   );
 
   return (
-    <Modal onClose={props.onClose}>
+    <Modal onShowCart={onShowCart}>
       {cartItems}
-      <div className={styles.total}>
+      <div className={classes.total}>
         <span>Total Amount</span>
-        <span>35.62</span>
+        <span>{cartData.totalAmount.toFixed(2)}</span>
       </div>
-      <div className={styles.actions}>
-        <button className={styles['button-alt']} onClick={props.onClose}>
+      <div className={classes.actions}>
+        <button className={classes['button-alt']} onClick={onShowCart}>
           Close
         </button>
-        <button className={styles.button}>Order</button>
+        {hasItems && <button className={classes.button}>Order</button>}
       </div>
     </Modal>
   );
-};
+}
 
 export default Cart;

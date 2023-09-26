@@ -1,46 +1,45 @@
-import { Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import styles from './Modal.module.css';
+import classes from './Modal.module.css';
 
 //These componenets could also be on a seperate file.
 //modal background
-const Backdrop = (props) => {
-	return <div className={styles.backdrop} onClick={props.onClose} />;
-};
+function Backdrop({ onShowCart }) {
+  return <div className={classes.backdrop} onClick={onShowCart} />;
+}
 
 //modal contents
-const ModalOverlay = (props) => {
-	return (
-		<div className={styles.modal}>
-			<div className={styles.content}>{props.children}</div>
-		</div>
-	);
-};
+function ModalOverlay({ children }) {
+  return (
+    <div className={classes.modal}>
+      <div className={classes.content}>{children}</div>
+    </div>
+  );
+}
 
 const portalElement = document.getElementById('overlays');
 
-const Modal = (props) => {
-	//using a portal
-	return (
-		<Fragment>
-			{ReactDOM.createPortal(
-				<Backdrop onClose={props.onClose} />,
-				portalElement
-			)}
-			{ReactDOM.createPortal(
-				<ModalOverlay>{props.children}</ModalOverlay>,
-				portalElement
-			)}
-		</Fragment>
-	);
-	//This will work without using 'portals'
-	// return (
-	// 	<Fragment>
-	// 		<Backdrop />
-	// 		{/* use props.children here to foward the content between modal tags */}
-	// 		<ModalOverLay>{props.children}</ModalOverLay>
-	// 	</Fragment>
-	// );
-};
+function Modal({ onShowCart, children }) {
+  //using a portal
+  return (
+    <>
+      {ReactDOM.createPortal(
+        <Backdrop onShowCart={onShowCart} />,
+        portalElement
+      )}
+      {ReactDOM.createPortal(
+        <ModalOverlay>{children}</ModalOverlay>,
+        portalElement
+      )}
+    </>
+  );
+  //This will work without using 'portals'
+  // return (
+  // 	<Fragment>
+  // 		<Backdrop />
+  // 		{/* use props.children here to foward the content between modal tags */}
+  // 		<ModalOverLay>{props.children}</ModalOverLay>
+  // 	</Fragment>
+  // );
+}
 
 export default Modal;

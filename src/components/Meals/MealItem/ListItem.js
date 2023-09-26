@@ -1,31 +1,33 @@
 import { useContext } from 'react';
 import MealItemForm from './MealItemForm';
-import styles from './ListItem.module.css';
+import classes from './ListItem.module.css';
 import CartContext from '../../../store/cart-context';
 
-const ListItem = (props) => {
-	//this will stablish a connection
-	const cartData = useContext(CartContext);
+function ListItem({ id, name, price, description }) {
+  //this will stablish a connection
+  const cartData = useContext(CartContext);
 
-	const addToCartHandler = (amount) => {
-		cartData.addItem({
-			id: props.id,
-			name: props.name,
-			amount: amount,
-			price: props.price,
-		});
-	};
-	return (
-		<li className={styles['list-item']}>
-			<div className={styles['list-item_details']}>
-				<h3>{props.name}</h3>
-				<div className={styles.desc}>{props.description}</div>
-				<div className={styles.price}>{`$${props.price.toFixed(2)}`}</div>
-			</div>
-			<div className={styles['list-item_qty']}>
-				<MealItemForm id={props.id} onAddToCart={addToCartHandler} />
-			</div>
-		</li>
-	);
-};
+  function addToCartHandler(count) {
+    // In CartProvider the addItemToCartHandler will be called
+    // The data comes from the AvailabelMeals component
+    cartData.addItem({
+      id,
+      name,
+      count,
+      price,
+    });
+  }
+  return (
+    <li className={classes['list-item']}>
+      <div className={classes['list-item_details']}>
+        <h3>{name}</h3>
+        <div className={classes.desc}>{description}</div>
+        <div className={classes.price}>{`$${price.toFixed(2)}`}</div>
+      </div>
+      <div className={classes['list-item_qty']}>
+        <MealItemForm id={id} onAddToCart={addToCartHandler} />
+      </div>
+    </li>
+  );
+}
 export default ListItem;
