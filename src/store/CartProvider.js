@@ -83,14 +83,6 @@ function CartProvider({ children }) {
     defaultCartState
   );
 
-  //this object will manange the data in the cart-context
-  const cartContext = {
-    items: cartState.items,
-    totalAmount: cartState.totalAmount,
-    addItem: addItemToCartHandler,
-    removeItem: removeItemFromCartHanlder,
-  };
-
   function addItemToCartHandler(item) {
     // this is the action used in the reducer. The item info will come from the ListItem component.
     dispatchCartAction({ type: 'ADD_ITEM', item });
@@ -98,6 +90,14 @@ function CartProvider({ children }) {
   function removeItemFromCartHanlder(id) {
     dispatchCartAction({ type: 'REMOVE_ITEM', id });
   }
+
+  //this object will manange the data in the cart-context
+  const cartContext = {
+    items: cartState.items,
+    totalAmount: cartState.totalAmount,
+    addItem: addItemToCartHandler,
+    removeItem: removeItemFromCartHanlder,
+  };
 
   return (
     <CartContext.Provider value={cartContext}>{children}</CartContext.Provider>
